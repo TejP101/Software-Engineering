@@ -47,7 +47,7 @@ class SandwichMachine:
         """Returns True when order can be made, False if ingredients are insufficient."""
         for item in ingredients:
             if(ingredients[item]> self.machine_resources[item]):
-                print(f"(Sorry there is not enough {item}")
+                print(f"Sorry there is not enough {item}")
                 return False
         return True
 
@@ -85,3 +85,29 @@ class SandwichMachine:
 
 
 ### Make an instance of SandwichMachine class and write the rest of the codes ###
+machine = SandwichMachine(resources)
+
+while True:
+    choice = input(
+        "What would you like? (small/ medium/ large/ off/ report): "
+    ).lower()
+
+    if choice == "off":
+        break
+
+    elif choice == "report":
+        print(f"Bread: {machine.machine_resources['bread']} slice(s)")
+        print(f"Ham: {machine.machine_resources['ham']} slice(s)")
+        print(f"Cheese: {machine.machine_resources['cheese']} ounce(s)")
+
+    elif choice in recipes:
+        sandwich = recipes[choice]
+        if machine.check_resources(sandwich["ingredients"]):
+            payment = machine.process_coins()
+            if machine.transaction_result(payment, sandwich["cost"]):
+                machine.make_sandwich(
+                    choice,
+                    sandwich["ingredients"]
+                )
+    else:
+        print("Invalid choice.")
