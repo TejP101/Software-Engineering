@@ -54,6 +54,14 @@ class SandwichMachine:
     def process_coins(self):
         """Returns the total calculated from coins inserted.
            Hint: include input() function here, e.g. input("how many quarters?: ")"""
+        dollar = int(input("How many dollars?: "))
+        half_dollar = int(input("How many half dollars?: "))
+        quarter = int(input("How many quarters?: "))
+        nickel = int(input("How many nickels?: "))
+
+        total= (dollar *1)+(half_dollar *.5) + (quarter *.25) + (nickel *.05)
+        return total
+
 
     def transaction_result(self, coins, cost):
         """Return True when the payment is accepted, or False if money is insufficient.
